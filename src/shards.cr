@@ -12,3 +12,5 @@ require "authentic"
 require "jwt"
 require "multi_auth"
 require "stripe"
+
+# https://github.com/crystal-i18n/i18n if i18n required
