@@ -1,5 +1,5 @@
 /* eslint no-console:0 */
-
+console.log(process.env.MIX_GOOGLE_CLIENT_ID)
 // Rails Unobtrusive JavaScript (UJS) is *required* for links in Lucky that use DELETE, POST and PUT.
 // Though it says "Rails" it actually works with any framework.
 require("@rails/ujs").start();
@@ -22,6 +22,28 @@ const application = Application.start();
 const context = require.context("./controllers", true, /\.ts$/);
 application.load(definitionsFromContext(context));
 
+declare var gapi: any;
+
+function onLibraryLoaded() {
+  gapi.load('auth2', function () {
+    gapi.auth2.init({
+      client_id: process.env.MIX_GOOGLE_CLIENT_ID,
+      scope: 'profile'
+    })
+    console.log('gapi loaded')
+  })
+}
+
+function onSignInClicked() {
+  gapi.load('auth2', function () {
+    gapi.auth2.signIn().then(function (googleUser) {
+      console.log('user signed in')
+    }, function (error) {
+      console.log('user failed to sign in')
+    })
+  })
+}
+
 // function onSignIn(googleUser) {
 //   // Useful data for your client-side scripts:
 //   var profile = googleUser.getBasicProfile();
@@ -42,6 +64,8 @@ application.load(definitionsFromContext(context));
 // function isUserSignedIn() {
 //   gapi.load('auth2', function () {
 //     var isSignedIn = auth2.isSignedIn.get();
-//     console.log('is signed in? ', isSigned In)
+//     console.log('is signed in? ', isSignedIn)
 //   })
 // }
+
+// isUserSignedIn()
