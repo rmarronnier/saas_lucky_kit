@@ -4,19 +4,31 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "module": "es6",
     "moduleResolution": "node",
     "baseUrl": ".",
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "paths": {
-      "*": ["node_modules/*", "app/js/*"]
+      "*": [
+        "node_modules/*",
+        "app/js/*"
+      ]
     },
     "sourceMap": true,
     "target": "es5",
-    "strict": true,
-    "alwaysStrict": true
+    "strict": false,
+    "alwaysStrict": false
   },
-  "exclude": ["node_modules", "lib", "public"],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "public"
+  ],
   "compileOnSave": false
 }

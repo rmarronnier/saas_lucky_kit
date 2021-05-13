@@ -7,6 +7,7 @@ class SignIns::NewPage < AuthLayout
 
   def content
     mount Shared::CenteredFormPanel, title: title_text do
+      auth_providers_buttons
       render_form(operation)
     end
   end
@@ -46,5 +47,14 @@ class SignIns::NewPage < AuthLayout
 
   private def title_text
     "Sign in"
+  end
+
+  private def auth_providers_buttons
+    # div class: "g-signin2", data_onsuccess: "onSignIn"
+    # button "Sign in with button onClick", onclick: "onSignInClicked()"
+    # div " ", "data-auto_prompt": "false", "data-client_id": ENV["GOOGLE_SECRET_KEY"], "data-login_uri": "#{Lucky::RouteHelper.settings.base_uri}/oauth/google/callback", "data-ux_mode": "redirect", id: "g_id_onload"
+    # div " ", class: "g_id_signin", "data-logo_alignment": "left", data_shape: "rectangular", data_size: "large", data_text: "sign_in_with", data_theme: "outline", data_type: "standard"
+
+    # div " ", "data-client_id": ENV["GOOGLE_SECRET_KEY"], "data-login_uri": "#{Lucky::RouteHelper.settings.base_uri}/oauth/google/callback", "data-your_own_param_1_to_login": "any_value", "data-your_own_param_2_to_login": "any_value", id: "g_id_onload"
   end
 end

@@ -2,7 +2,6 @@ class Marketing::IndexPage < AuthLayout
   def content
     div class: "relative bg-gray-50 overflow-hidden" do
       render_hero
-      div class: "g-signin2", data_onsuccess: "onSignIn"
       render_features
     end
   end
