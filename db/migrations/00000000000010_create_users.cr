@@ -8,7 +8,7 @@ class CreateUsers::V00000000000010 < Avram::Migrator::Migration::V1
       add encrypted_password : String
       add confirmed_at : Time?
       add confirmation_token : String
-      add customer_id : String
+      add customer_id : String?
     end
   end
 

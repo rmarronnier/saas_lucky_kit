@@ -24,6 +24,8 @@ application.load(definitionsFromContext(context));
 
 declare var gapi: any;
 
+
+
 function onLibraryLoaded() {
   gapi.load('auth2', function () {
     gapi.auth2.init({

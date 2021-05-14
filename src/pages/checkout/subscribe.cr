@@ -1,6 +1,6 @@
-class Dashboard::IndexPage < MainLayout
+class Subscribe::IndexPage < MainLayout
   def page_title
-    "Dashboard"
+    "Checkout"
   end
 
   def content
@@ -10,11 +10,16 @@ class Dashboard::IndexPage < MainLayout
       end
 
       div class: "px-4 py-5 sm:p-6" do
-        h3 "We should put some content here..."
-        ul do
-          li current_user.customer_id.to_s
-        end
+        render_form
       end
+    end
+  end
+
+  private def render_form
+    form id: "payment-form" do
+      div id: "card-element"
+      div id: "card-element-errors", role: "alert"
+      button "Subscribe", type: "submit", id: "submit-payment-btn"
     end
   end
 end
