@@ -18,6 +18,6 @@ class Subscription < BaseModel
   end
 
   def tier_from_associated_product
-    ProductsData::INSTANCE.products[@stripe_product_id].tier
+    ProductsData::INSTANCE.products.find { |product| @stripe_product_id == product.id }.not_nil!.tier
   end
 end

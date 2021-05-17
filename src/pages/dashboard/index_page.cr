@@ -13,7 +13,12 @@ class Dashboard::IndexPage < MainLayout
         h3 "We should put some content here..."
         ul do
           li current_user.customer_id.to_s
-          mount Shared::CheckoutCTA, price_id: "price_1IqjDxJN5FrkuvKhKExUK1B2"
+        end
+        aside do
+          ProductsData::INSTANCE.products.each do |product|
+            h4 product.name
+            mount Shared::CheckoutCTA, price_id: product.month_price.id
+          end
         end
       end
     end

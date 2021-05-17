@@ -4,6 +4,7 @@ module Users::Customer
       Free
       Basic
       Premium
+      Pro
       Custom # For specific Entreprise plans
     end
     column customer_id : String?
