@@ -1,4 +1,4 @@
-// declare var Stripe: any;
+declare var stripe: any;
 // declare var priceId: any;
 // declare var customerId: any;
 // declare var changeLoadingStatePrices: any;
@@ -40,3 +40,21 @@ var createCheckoutSession = function (priceId) {
     return result.json();
   });
 };
+
+var customerPortalButtons = Array.from(document.getElementsByClassName("customer-portal-button"));
+
+customerPortalButtons.forEach(button => button.addEventListener('click', function (e) {
+  e.preventDefault();
+  fetch('/customer-portal', {
+    method: 'POST'
+  })
+    .then(function (response) {
+      return response.json()
+    })
+    .then(function (data) {
+      window.location.href = data.url;
+    })
+    .catch(function (error) {
+      console.error('Error:', error);
+    });
+}));

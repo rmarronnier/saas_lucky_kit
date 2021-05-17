@@ -11,7 +11,7 @@ class Checkout::Create < ApiAction
       }],
       expand: ["latest_invoice.payment_intent"]
     )
-
-    json({"subscriptionId" => subscription.id, "clientSecret" => subscription.latest_invoice.as(Stripe::Invoice).payment_intent.as(Stripe::PaymentIntent).client_secret})
+    json("sdfsdf")
+    # json({"subscriptionId" => subscription.id, "clientSecret" => subscription.latest_invoice.as(Stripe::Invoice).payment_intent.as(Stripe::PaymentIntent).client_secret})
   end
 end

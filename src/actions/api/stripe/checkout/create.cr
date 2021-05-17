@@ -11,8 +11,8 @@ class CheckoutSession::Create < ApiAction
     # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
 
     session = Stripe::Checkout::Session.create(
-      customer: current_user.customer_id
-      customer_email: current_user.email
+      customer: current_user.customer_id,
+      customer_email: current_user.email,
       success_url: "#{Lucky::RouteHelper.settings.base_uri}/checkout/success/{CHECKOUT_SESSION_ID}",
       cancel_url: "#{Lucky::RouteHelper.settings.base_uri}/checkout/cancelled",
       payment_method_types: ["card"],
@@ -24,7 +24,7 @@ class CheckoutSession::Create < ApiAction
     )
 
     json({
-      sessionId: session.id,
+      sessionId: session.id.to_s,
     })
   end
 end

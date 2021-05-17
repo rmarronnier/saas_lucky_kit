@@ -9,6 +9,7 @@ class CreateUsers::V00000000000010 < Avram::Migrator::Migration::V1
       add confirmed_at : Time?
       add confirmation_token : String
       add customer_id : String?
+      add tier : Int32, default: 0
     end
   end
 
