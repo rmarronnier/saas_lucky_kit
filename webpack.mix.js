@@ -30,7 +30,8 @@ if (mix.inProduction()) {
 
   let brotliCompression = new CompressionWepackPlugin({
     compressionOptions: { level: 11 },
-    filename: "[path].br[query]",
+    filename: "[path][base].br",
+    // filename: "[path].br[query]",
     algorithm: "brotliCompress",
     test: /\.js$|\.css$|\.html$|\.svg$/,
   });
