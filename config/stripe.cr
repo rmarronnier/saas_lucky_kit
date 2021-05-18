@@ -7,4 +7,4 @@ def raise_missing_stripe_secret_key_message
   exit(1)
 end
 
-Stripe.api_key = stripe_secret_key_from_env unless Lucky::Env.test?
+Stripe.api_key = stripe_secret_key_from_env # unless Lucky::Env.test?

@@ -18,3 +18,39 @@ window.onload = function () {
   }))
 
 }
+
+// https://stackoverflow.com/questions/57884800/new-stripe-sca-checkout-flow-in-rails
+// ---
+//   (The Stimulus controller)
+// app / javascript / controllers / subscription_controller.js
+// import { Controller } from "stimulus"
+
+// export default class extends Controller {
+//   static targets = ['sessionID']
+
+//   get sessionID() {
+//     return this.sessionIDTarget.parentElement.dataset.session
+//   }
+
+//   initialize() {
+//     const script = document.createElement('script')
+//     script.src = "https://js.stripe.com/v3/"
+
+//     document.head.appendChild(script)
+//   }
+
+//   redirectToCheckout(e) {
+//     e.preventDefault()
+
+//     // grab your key securely in whichever way works for you
+//     const stripe = Stripe('pk_test_xxx')
+
+//     const CHECKOUT_SESSION_ID = this.sessionID
+
+//     stripe.redirectToCheckout({
+//       sessionId: CHECKOUT_SESSION_ID
+//     }).then((result) => {
+//       console.log(result.error.message)
+//     })
+//   }
+// }

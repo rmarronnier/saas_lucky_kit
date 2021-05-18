@@ -8,7 +8,7 @@
 #   payload = request.body.read
 #   if !webhook_secret.empty?
 #     # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
-#     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+#     sig_header = request.env["HTTP_STRIPE_SIGNATURE"]
 #     event = nil
 
 #     begin

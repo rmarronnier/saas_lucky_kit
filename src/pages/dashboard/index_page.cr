@@ -19,6 +19,7 @@ class Dashboard::IndexPage < MainLayout
             h4 product.name
             mount Shared::CheckoutCTA, price_id: product.month_price.id
           end
+          mount Shared::CustomerPortalLink
         end
       end
     end
