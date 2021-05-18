@@ -3,6 +3,7 @@ class User < BaseModel
   include Authentic::PasswordAuthenticatable
 
   include Users::EmailConfirmable
+  include Users::Customer
 
   table do
     column email : String

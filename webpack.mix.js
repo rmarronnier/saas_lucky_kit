@@ -45,6 +45,7 @@ mix
   // More info and options (like React support) here:
   // https://github.com/JeffreyWay/laravel-mix/blob/master/docs/mixjs.md
   .ts("src/js/app.ts", "js/app.js")
+  .ts("src/js/checkout.ts", "js/checkout.js")
   // SASS entry file. Uses autoprefixer automatically.
   .postCss("src/css/app.css", "css", [require("tailwindcss")])
   // Customize postCSS:
