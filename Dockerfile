@@ -51,9 +51,11 @@ RUN chmod +x /usr/local/bin/release
 FROM alpine as webserver
 ENV LUCKY_ENV=production
 ENV NODE_ENV=production
+ENV PORT=5000
 WORKDIR /app
 COPY --from=release_script_build /usr/local/bin/release release
 COPY --from=lucky_build /usr/local/bin/lucky /usr/local/bin/lucky
 COPY --from=webserver_build /usr/local/bin/webserver webserver
 COPY --from=webpack_build /tmp_webpack/public public
+EXPOSE 5000
 CMD ["./release"]
