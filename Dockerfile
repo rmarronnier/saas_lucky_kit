@@ -56,4 +56,6 @@ COPY --from=release_script_build /usr/local/bin/release release
 COPY --from=lucky_build /usr/local/bin/lucky /usr/local/bin/lucky
 COPY --from=webserver_build /usr/local/bin/webserver webserver
 COPY --from=webpack_build /tmp_webpack/public public
+ENV PORT 5000
+EXPOSE $PORT
 CMD ["./release"]
