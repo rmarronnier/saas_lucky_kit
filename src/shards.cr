@@ -3,7 +3,7 @@ require "lucky_env"
 
 # If you use .env files in production or test environments, adjust this accordingly.
 env_file = Lucky::Env.test? ? ".env.test" : ".env"
-LuckyEnv.load(env_file)
+LuckyEnv.load(env_file) unless Lucky::Env.production?
 # LuckyEnv.load(".env") # if Lucky::Env.development?
 
 # Require your shards here
