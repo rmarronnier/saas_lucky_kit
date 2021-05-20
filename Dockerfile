@@ -57,5 +57,4 @@ COPY --from=lucky_build /usr/local/bin/lucky /usr/local/bin/lucky
 COPY --from=webserver_build /usr/local/bin/webserver webserver
 COPY --from=webpack_build /tmp_webpack/public public
 # # ENV PORT 5000
-EXPOSE 5000
-CMD ["./release"] -p 5000:5000
+CMD ["./release"] -p 5000:6000
