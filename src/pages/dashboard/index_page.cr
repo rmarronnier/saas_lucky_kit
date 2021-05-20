@@ -11,16 +11,6 @@ class Dashboard::IndexPage < MainLayout
 
       div class: "px-4 py-5 sm:p-6" do
         h3 "We should put some content here..."
-        ul do
-          li current_user.customer_id.to_s
-        end
-        aside do
-          ProductsData::INSTANCE.products.each do |product|
-            h4 product.name
-            mount Shared::CheckoutCTA, price_id: product.month_price.id
-          end
-          mount Shared::CustomerPortalLink
-        end
       end
     end
   end

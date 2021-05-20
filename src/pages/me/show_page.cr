@@ -10,6 +10,17 @@ class Me::ShowPage < MainLayout
       end
       div class: "px-4 py-5 sm:p-6" do
         h3 "Email:  #{current_user.email}"
+        ul do
+          li current_user.customer_id.to_s
+          li current_user.tier.to_s
+        end
+        aside do
+          ProductsData::INSTANCE.products.each do |product|
+            h4 product.name
+            mount Shared::CheckoutCTA, price_id: product.month_price.id
+          end
+          mount Shared::CustomerPortalLink
+        end
       end
     end
   end
