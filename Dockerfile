@@ -8,7 +8,7 @@ RUN  shards install --production
 # Install the application Yarn dependencies in a Crystal container
 FROM node:alpine as node_dependencies
 WORKDIR /tmp_node
-COPY package.json yarn.lock .
+COPY package.json yarn.lock /
 RUN yarn install
 
 # Compile the production CSS/JS assets in a Node container
