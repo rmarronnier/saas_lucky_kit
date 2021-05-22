@@ -8,3 +8,5 @@ def raise_missing_stripe_secret_key_message
 end
 
 Stripe.api_key = stripe_secret_key_from_env # unless Lucky::Env.test?
+
+# STRIPE_WEBHOOK_SECRET = ENV["STRIPE_WEBHOOK_SECRET"]?
