@@ -8,6 +8,7 @@ class StripeEvents::Webhook < ApiAction
     head 500 if webhook_secret.nil?
     payload = request.body.to_s
     # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
+    json(request.headers)
     sig_header = request.headers["Stripe-Signature"]
     # event = nil
     begin
