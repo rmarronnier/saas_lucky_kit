@@ -4,8 +4,8 @@ class StripeEvents::Webhook < ApiAction
   post "/stripe/webhook" do
     # You can use webhooks to receive information about asynchronous payment events.
     # For more about our webhook events check out https://stripe.com/docs/webhooks.
-    json(request.headers)
-    # webhook_secret = Application.settings.stripe_webhook_secret
+    webhook_secret = Application.settings.stripe_webhook_secret
+    json({headers: request.headers, webhook_secret: webhook_secret})
     # head 500 if webhook_secret.nil?
     # payload = request.body.to_s
     # # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
