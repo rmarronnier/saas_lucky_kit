@@ -11,7 +11,7 @@ class Stripe::Webhook
   # SignatureVerificationError if the signature verification fails.
   def self.construct_event(payload : String, sig_header : String, secret : String,
                            tolerance : Int32? = DEFAULT_TOLERANCE)
-    Signature.verify_header(payload, sig_header, secret, tolerance)
+    Signature.verify_header(payload: payload, header: sig_header, secret: secret, tolerance: tolerance)
 
     Stripe::Event.from_json(payload)
   end
@@ -74,29 +74,29 @@ class Stripe::Webhook
       rescue
         raise SignatureVerificationError.new(
           message: "Unable to extract timestamp and signatures from header",
-          header: header, param: payload.to_s
+          header: header, param: payload
         )
       end
 
       if signatures.empty?
         raise SignatureVerificationError.new(
           message: "No signatures found with expected scheme #{EXPECTED_SCHEME}",
-          header: header, param: payload.to_s
+          header: header, param: payload
         )
       end
 
-      expected_sig = compute_signature(timestamp, payload, secret)
+      expected_sig = compute_signature(timestamp: timestamp, payload: payload, secret: secret)
       unless signatures.any? { |s| Crypto::Subtle.constant_time_compare(expected_sig, s) }
         raise SignatureVerificationError.new(
-          "No signatures found matching the expected signature for payload",
-          header: header, param: payload.to_s
+          "No signatures found matching the expected signature for payload" + [expected_sig, signatures].to_s,
+          header: header, param: payload
         )
       end
 
       if timestamp.to_unix.to_i < Time.utc.to_unix.to_i - tolerance
         raise SignatureVerificationError.new(
           "Timestamp outside the tolerance zone (#{timestamp})",
-          header: header, param: payload.to_s
+          header: header, param: payload
         )
       end
 
