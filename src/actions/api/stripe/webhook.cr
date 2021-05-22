@@ -5,14 +5,14 @@ class StripeEvents::Webhook < ApiAction
     # You can use webhooks to receive information about asynchronous payment events.
     # For more about our webhook events check out https://stripe.com/docs/webhooks.
     webhook_secret = Application.settings.stripe_webhook_secret
-    json({signature_header: request.headers["Stripe-Signature"], webhook_secret: webhook_secret, payload: params.from_json})
+    # json({signature_header: request.headers["Stripe-Signature"], webhook_secret: webhook_secret, payload: params.from_json})
     # head 500 if webhook_secret.nil?
-    # payload = request.body.to_s
+    # payload = params.from_json
     # # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
-    # sig_header = request.headers["Stripe-Signature"]
+    signature_header = request.headers["Stripe-Signature"]
     # # event = nil
     # begin
-    #   event = Stripe::Webhook.construct_event(payload, sig_header, webhook_secret.not_nil!)
+    event = Stripe::Webhook.construct_event(payload: request.body.to_s, sig_header: signature_header, secret: webhook_secret)
     # rescue SignatureVerificationError
     #   # Invalid signature
     #   puts "⚠️  Webhook signature verification failed."
@@ -22,6 +22,6 @@ class StripeEvents::Webhook < ApiAction
     # event_type = event.not_nil!.type
     # # data_object = data["object"]
     # puts "🔔  Payment succeeded!" if event_type == "checkout.session.completed"
-    # json({status: "success"})
+    json({status: "success", event: event})
   end
 end
