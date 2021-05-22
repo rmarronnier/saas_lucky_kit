@@ -1,6 +1,6 @@
 class StripeEvents::Webhook < ApiAction
   include Api::Auth::SkipRequireAuthToken
-  accepted_formats [:json, :xml]
+  accepted_formats [:json, :xml], default: :json
   post "/stripe/webhook" do
     # You can use webhooks to receive information about asynchronous payment events.
     # For more about our webhook events check out https://stripe.com/docs/webhooks.
