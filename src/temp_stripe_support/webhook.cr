@@ -13,7 +13,7 @@ class Stripe::Webhook
                            tolerance : Int32? = DEFAULT_TOLERANCE)
     Signature.verify_header(payload: payload.to_s, header: sig_header, secret: secret, tolerance: tolerance)
 
-    Stripe::Event.from_json(payload)
+    Stripe::Event.from_json(payload.gets_to_end)
   rescue JSON::SerializableError
     raise PayloadParsingError.new(message: "Payload is either invalid json or not a valid serialization of a Stripe::Event", payload: payload.to_s)
   end
