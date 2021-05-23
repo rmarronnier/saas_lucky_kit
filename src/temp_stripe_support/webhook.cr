@@ -24,10 +24,6 @@ class Stripe::Webhook
     # Computes a webhook signature given a time (probably the current time),
     # a payload, and a signing secret.
     def self.compute_signature(timestamp : Time, payload : String, secret : String) : String
-      # raise ArgumentError.new(message: "timestamp should be an instance of Time")  unless timestamp.is_a?(Time)
-      # raise ArgumentError.new(message: "payload should be a string") unless payload.is_a?(String)
-      # raise ArgumentError.new(message: "secret should be a string")  unless secret.is_a?(String)
-
       timestamped_payload = "#{timestamp.to_unix.to_i}.#{payload}"
       OpenSSL::HMAC.hexdigest(OpenSSL::Algorithm.new(:SHA256), secret,
         timestamped_payload)
@@ -40,13 +36,6 @@ class Stripe::Webhook
     # mainly here for use in test cases (those that are both within this
     # project and without).
     def self.generate_header(timestamp : Time, signature : String, scheme : String = EXPECTED_SCHEME) : String
-      # raise ArgumentError, "timestamp should be an instance of Time" \
-      #   unless timestamp.is_a?(Time)
-      # raise ArgumentError, "signature should be a string" \
-      #   unless signature.is_a?(String)
-      # raise ArgumentError, "scheme should be a string" \
-      #   unless scheme.is_a?(String)
-
       "t=#{timestamp.to_unix},#{scheme}=#{signature}"
     end
 
