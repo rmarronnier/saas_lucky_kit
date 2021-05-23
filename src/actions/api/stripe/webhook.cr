@@ -12,7 +12,12 @@ class StripeEvents::Webhook < ApiAction
     signature_header = request.headers["Stripe-Signature"]
     # # event = nil
     # begin
-    event = Stripe::Webhook.construct_event(payload: request.body.to_s, sig_header: signature_header, secret: webhook_secret)
+    begin
+      event = Stripe::Webhook.construct_event(payload: request.body.to_s, sig_header: signature_header, secret: webhook_secret)
+    rescue e : PayloadParsingError
+      Log.error { e.payload }
+      json({payload: e.payload})
+    end
     # rescue SignatureVerificationError
     #   # Invalid signature
     #   puts "⚠️  Webhook signature verification failed."
