@@ -13,7 +13,7 @@ class StripeEvents::Webhook < ApiAction
     # # event = nil
     # begin
     begin
-      event = Stripe::Webhook.construct_event(payload: request.body.to_s, sig_header: signature_header, secret: webhook_secret)
+      event = Stripe::Webhook.construct_event(payload: request.body.not_nil!, sig_header: signature_header, secret: webhook_secret)
     rescue e : PayloadParsingError
       Log.error { e.payload }
       json({payload: e.payload})
@@ -27,7 +27,10 @@ class StripeEvents::Webhook < ApiAction
     # event_type = event.not_nil!.type
     # # data_object = data["object"]
     # puts "🔔  Payment succeeded!" if event_type == "checkout.session.completed"
-    # json({status: "success", event: event}) unless event.nil?
-    json({status: "success", payload: request.body.to_s}) # unless event.nil?
+    if !event.nil?
+      json({status: "success", event: event})
+    else
+      json({status: "error", payload: request.body.to_s})
+    end
   end
 end
