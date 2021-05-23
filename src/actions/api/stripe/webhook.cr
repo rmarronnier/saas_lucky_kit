@@ -17,6 +17,8 @@ class StripeEvents::Webhook < ApiAction
     rescue e : PayloadParsingError
       Log.error { e.payload }
       json({payload: e.payload})
+    rescue SignatureVerificationError
+      Log.error { "⚠️  Webhook signature verification failed." }
     end
     # rescue SignatureVerificationError
     #   # Invalid signature
