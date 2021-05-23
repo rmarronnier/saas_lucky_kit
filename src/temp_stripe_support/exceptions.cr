@@ -1,4 +1,5 @@
 class SignatureVerificationError < Exception
+  include JSON::Serializable
   property message : String?
   property param : String?
   property header : String?
@@ -8,9 +9,12 @@ class SignatureVerificationError < Exception
 end
 
 class PayloadParsingError < Exception
+  include JSON::Serializable
   property message : String?
   property payload : String
 
-  def initialize(@message, @payload)
+  property parsing_error : String
+
+  def initialize(@message, @payload, @parsing_error)
   end
 end

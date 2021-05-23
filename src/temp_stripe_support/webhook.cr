@@ -14,8 +14,8 @@ class Stripe::Webhook
     Signature.verify_header(payload: payload.to_s, header: sig_header, secret: secret, tolerance: tolerance)
 
     Stripe::Event.from_json(payload.gets_to_end)
-  rescue JSON::SerializableError
-    raise PayloadParsingError.new(message: "Payload is either invalid json or not a valid serialization of a Stripe::Event", payload: payload.to_s)
+  rescue e : JSON::SerializableError
+    raise PayloadParsingError.new(message: "Payload is either invalid json or not a valid serialization of a Stripe::Event", payload: payload.to_s, parsing_error: e.message.to_s)
   end
 
   module Signature

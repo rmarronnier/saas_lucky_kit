@@ -15,10 +15,13 @@ class StripeEvents::Webhook < ApiAction
     begin
       event = Stripe::Webhook.construct_event(payload: request.body.not_nil!, sig_header: signature_header, secret: webhook_secret)
     rescue e : PayloadParsingError
-      Log.error { e.payload }
-      json({payload: e.payload})
-    rescue SignatureVerificationError
+      Log.error { e }
+      json({status: "error", error: e})
+    rescue e2 : SignatureVerificationError
       Log.error { "⚠️  Webhook signature verification failed." }
+      json({status: "error", error: e2})
+    else
+      json({status: "success", event: event.not_nil!})
     end
     # rescue SignatureVerificationError
     #   # Invalid signature
@@ -29,10 +32,10 @@ class StripeEvents::Webhook < ApiAction
     # event_type = event.not_nil!.type
     # # data_object = data["object"]
     # puts "🔔  Payment succeeded!" if event_type == "checkout.session.completed"
-    if !event.nil?
-      json({status: "success", event: event})
-    else
-      json({status: "error", payload: request.body.to_s})
-    end
+    # if !event.nil?
+    #   json({status: "success", event: event})
+    # else
+    #   json({status: "error", error: e)
+    # end
   end
 end
