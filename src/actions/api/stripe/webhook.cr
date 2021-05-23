@@ -27,6 +27,7 @@ class StripeEvents::Webhook < ApiAction
     # event_type = event.not_nil!.type
     # # data_object = data["object"]
     # puts "🔔  Payment succeeded!" if event_type == "checkout.session.completed"
-    json({status: "success", event: event}) unless event.nil?
+    # json({status: "success", event: event}) unless event.nil?
+    json({status: "success", payload: payload}) unless event.nil?
   end
 end
