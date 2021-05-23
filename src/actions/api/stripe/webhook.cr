@@ -13,7 +13,7 @@ class StripeEvents::Webhook < ApiAction
     # # event = nil
     # begin
     begin
-      event = Stripe::Webhook.construct_event(payload: request.body.not_nil!, sig_header: signature_header, secret: webhook_secret)
+      event = Stripe::Webhook.construct_event(payload: request.body.not_nil!.gets_to_end, sig_header: signature_header, secret: webhook_secret)
     rescue e : PayloadParsingError
       Log.error { e }
       json({status: "error", error: e})

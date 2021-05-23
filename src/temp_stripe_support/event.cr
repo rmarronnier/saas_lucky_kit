@@ -10,7 +10,7 @@ class Stripe::Event
 
   alias StripeObject = Stripe::Customer | Stripe::Product | Stripe::Invoice | Stripe::Subscription | Stripe::Price | Stripe::Coupon | Stripe::Plan | Stripe::Balance | Stripe::Charge | Stripe::Payout | Stripe::PaymentIntent | Stripe::SetupIntent | Stripe::PromotionCode | Stripe::Source | Stripe::TaxRate # | Stripe::Checkout::Session
 
-  # missing stripe objects to add : Stripe::Person | Stripe::File | Stripe::CreditNote | Stripe::Account | Stripe::Capability | Stripe::Identity | Stripe::InvoiceItem
+  # missing Stripe objects to add : Stripe::Person | Stripe::File | Stripe::CreditNote | Stripe::Account | Stripe::Capability | Stripe::Identity | Stripe::InvoiceItem
   # all Stripe::Issuing objects | Stripe::Mandate | Stripe::Order | Stripe::OrderReturn | Stripe::Radar | Stripe::Recipient | Stripe::Reporting | Stripe::Review | Stripe::Sigma |
   # Stripe::Sku | Stripe::SubscriptionSchedule | Stripe::Topup | Stripe::Transfer |
   class Data
