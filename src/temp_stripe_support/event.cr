@@ -18,7 +18,7 @@ class Stripe::Event
   getter id : String
   getter api_version : String
   getter data : Data
-  getter request : Request
+  getter request : Request?
   getter object : String = "event"
   getter account : String?
 
