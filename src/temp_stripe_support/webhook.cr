@@ -13,7 +13,7 @@ class Stripe::Webhook
                            tolerance : Int32? = DEFAULT_TOLERANCE)
     Signature.verify_header(payload: payload, header: sig_header, secret: secret, tolerance: tolerance)
 
-    Stripe::Event.from_json(payload)
+    Stripe::Event.from_json(JSON.parse(payload).to_json)
   end
 
   module Signature
