@@ -8,7 +8,7 @@ class SignatureVerificationError < Exception
 end
 
 class PayloadParsingError < Exception
-  property message : String
+  property message : String?
   property payload : String
 
   def initialize(@message, @payload)
