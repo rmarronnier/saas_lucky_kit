@@ -26,7 +26,7 @@ class StripeEvents::Webhook < ApiAction
       subscription = Stripe::Subscription.retrieve(event.data.object["subscription"].to_s)
       create_new_subscription(subscription) if SubscriptionQuery.new.stripe_id(subscription.id).first?.nil?
     when "customer.subscription.created"
-      subscription = Stripe::Subscription.from_json(event.data.object.to_s) # .retrieve(event.data.object["id"].to_s)
+      subscription = Stripe::Subscription.from_json(event.data.object.to_json) # .retrieve(event.data.object["id"].to_s)
       json({status: "success", subscription_object: subscription})
       # create_new_subscription(subscription) if SubscriptionQuery.new.stripe_id(subscription.id).first?.nil?
     when "customer.subscription.updated"
