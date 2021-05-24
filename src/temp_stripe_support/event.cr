@@ -15,7 +15,7 @@ class Stripe::Event
   # Stripe::Sku | Stripe::SubscriptionSchedule | Stripe::Topup | Stripe::Transfer |
   class Data
     include JSON::Serializable
-    getter object : StripeObject
+    getter object : JSON::Any
   end
 
   getter id : String
