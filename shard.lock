@@ -20,6 +20,10 @@ shards:
     git: https://github.com/luckyframework/carbon.git
     version: 0.1.4
 
+  carbon_postmark_adapter:
+    git: https://github.com/makisu/carbon_postmark_adapter.git
+    version: 0.2.0+git.commit.52c412f4bf2abad6bff98cc6007ec8efdeff12d3
+
   cry:
     git: https://github.com/luckyframework/cry.git
     version: 0.4.3

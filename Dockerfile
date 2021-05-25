@@ -3,7 +3,7 @@ FROM crystallang/crystal:1.0.0-alpine as crystal_dependencies
 ENV SKIP_LUCKY_TASK_PRECOMPILATION="1"
 WORKDIR /tmp_crystal
 COPY shard.yml shard.lock ./
-RUN  shards install --production
+RUN  shards install --production --ignore-crystal-version
 
 # Install the application Yarn dependencies in a Crystal container
 FROM node:alpine as node_dependencies
